@@ -29,7 +29,7 @@ const App: () => React$Node = () => {
 
   const onInputTextChange = text => setTextValue(text)
 
-  const onItemPress = (index) => () => console.log(index)
+  const onItemPress = index => () => console.log(index)
 
   return (
     <View style={{ padding: 12 }}>

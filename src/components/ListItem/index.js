@@ -9,7 +9,7 @@ const ListItem = ({ position, isDone, onItemPress }) => {
   const { key, title } = item
 
   return (
-    <TouchableOpacity onPress={() => onItemPress(index)}>
+    <TouchableOpacity onPress={onItemPress(index)}>
       <View style={styles.itemWrapper}>
         <View style={styles.iconContainer}>
           <Image style={styles.icon} source={isDone ? DoneIcon : ToDoIcon}/>

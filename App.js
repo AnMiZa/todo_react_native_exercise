@@ -7,36 +7,36 @@
  */
 
 import React, { useState } from 'react'
-import { Button, FlatList, Text, TextInput } from 'react-native'
+import { View } from 'react-native'
+import ItemList from './src/components/ItemList'
+import InputBar from './src/components/InputBar'
 
 const App: () => React$Node = () => {
 
   const [list, setList] = useState([])
   const [textValue, setTextValue] = useState('')
 
-  return (
-    <>
-      <TextInput
-        value={textValue}
-        onChangeText={text => setTextValue(text)}
-      />
-      <Button title={'Dodaj'} onPress={() => {
-        let newListItem = {
-          key: (list.length + 1).toString(),
-          title: textValue
-        }
+  const onAddButtonPress = () => {
+    let newListItem = {
+      key: (list.length + 1).toString(),
+      title: textValue
+    }
 
-        setList([...list, newListItem])
-        setTextValue('')
-      }}
+    setList([...list, newListItem])
+    setTextValue('')
+  }
+
+  const onInputTextChange = text => setTextValue(text)
+
+  return (
+    <View style={{ padding: 12 }}>
+      <InputBar
+        textValue={textValue}
+        onAddButtonPress={onAddButtonPress}
+        onInputTextChange={onInputTextChange}
       />
-      <FlatList
-        data={list}
-        renderItem={position => {
-          return <Text key={position.item.key}>{position.item.title}</Text>
-        }}
-      />
-    </>
+      <ItemList list={list}/>
+    </View>
   )
 }
 

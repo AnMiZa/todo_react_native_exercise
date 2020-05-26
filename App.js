@@ -19,7 +19,8 @@ const App: () => React$Node = () => {
   const onAddButtonPress = () => {
     let newListItem = {
       key: (list.length + 1).toString(),
-      title: textValue
+      title: textValue,
+      isDone: false
     }
 
     setList([...list, newListItem])
@@ -28,6 +29,8 @@ const App: () => React$Node = () => {
 
   const onInputTextChange = text => setTextValue(text)
 
+  const onItemPress = (index) => () => console.log(index)
+
   return (
     <View style={{ padding: 12 }}>
       <InputBar
@@ -35,7 +38,11 @@ const App: () => React$Node = () => {
         onAddButtonPress={onAddButtonPress}
         onInputTextChange={onInputTextChange}
       />
-      <ItemList list={list}/>
+      <ItemList
+        list={list}
+        onItemPress={onItemPress}
+        // isDone={isDone}
+      />
     </View>
   )
 }

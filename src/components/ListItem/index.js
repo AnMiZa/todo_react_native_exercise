@@ -4,19 +4,19 @@ import { Image, Text, TouchableOpacity, View } from 'react-native'
 import ToDoIcon from '../../assets/images/to_do.png'
 import DoneIcon from '../../assets/images/done.png'
 
-const ListItem = ({ position, isDone, onItemPress }) => {
-  const { item, index } = position
+const ListItem = ({ position, markAsDone }) => {
+  const { item } = position
   const { key, title } = item
 
   return (
-    <TouchableOpacity onPress={onItemPress(index)}>
+    <TouchableOpacity onPress={markAsDone(key)}>
       <View style={styles.itemWrapper}>
         <View style={styles.iconContainer}>
-          <Image style={styles.icon} source={isDone ? DoneIcon : ToDoIcon}/>
+          <Image style={styles.icon} source={item.isDone ? DoneIcon : ToDoIcon}/>
         </View>
         <View style={styles.taskContainer}>
           <Text
-            style={styles.text}
+            style={item.isDone ? styles.textDone : styles.textNotDone}
             key={key}
           >
             {title}

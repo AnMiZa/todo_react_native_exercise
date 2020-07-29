@@ -29,7 +29,19 @@ const App: () => React$Node = () => {
 
   const onInputTextChange = text => setTextValue(text)
 
-  const onItemPress = index => () => console.log(index)
+  const markAsDone = key => () => {
+    let existingList = [...list]
+
+    existingList.forEach(item => {
+      if(item.key !== key) return
+      item.isDone = !item.isDone
+    })
+
+    setList(existingList)
+    return false
+  }
+
+  console.log(list)
 
   return (
     <View style={{ padding: 12 }}>
@@ -41,7 +53,7 @@ const App: () => React$Node = () => {
       <ItemList
         list={list}
         onItemPress={onItemPress}
-        // isDone={isDone}
+        markAsDone={markAsDone}
       />
     </View>
   )

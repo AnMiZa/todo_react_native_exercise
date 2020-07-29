@@ -3,7 +3,7 @@ import { FlatList, Text } from 'react-native'
 import styles from './styles'
 import ListItem from '../ListItem'
 
-const ItemList = ({ list, onItemPress, isDone }) => {
+const ItemList = ({ list, onItemPress, isDone, markAsDone }) => {
 
   return list.length === 0
     ?
@@ -11,7 +11,7 @@ const ItemList = ({ list, onItemPress, isDone }) => {
     :
     <FlatList
       data={list}
-      renderItem={position => <ListItem position={position} onItemPress={onItemPress || null} isDone={isDone}/>}
+      renderItem={position => <ListItem position={position} onItemPress={onItemPress || null} isDone={isDone} markAsDone={markAsDone}/>}
     />
 }
 

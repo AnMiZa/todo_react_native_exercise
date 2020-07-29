@@ -16,7 +16,12 @@ export default StyleSheet.create({
     width: 20,
     height: 20
   },
-  text: {
+  textNotDone: {
     fontSize: 20
+  },
+  textDone: {
+    fontSize: 20,
+    color: '#aaa',
+    textDecorationLine: 'line-through'
   },
 })

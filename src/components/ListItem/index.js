@@ -3,6 +3,7 @@ import styles from './styles'
 import { Image, Text, TouchableOpacity, View } from 'react-native'
 import ToDoIcon from '../../assets/images/to_do.png'
 import DoneIcon from '../../assets/images/done.png'
+import propTypes from 'prop-types'
 
 const ListItem = ({ position, markAsDone }) => {
   const { item } = position
@@ -25,6 +26,11 @@ const ListItem = ({ position, markAsDone }) => {
       </View>
     </TouchableOpacity>
   )
+}
+
+ListItem.propTypes = {
+  position: propTypes.object.isRequired,
+  markAsDone: propTypes.func.isRequired
 }
 
 export default ListItem

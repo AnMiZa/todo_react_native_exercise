@@ -52,7 +52,6 @@ const App: () => React$Node = () => {
       />
       <ItemList
         list={list}
-        onItemPress={onItemPress}
         markAsDone={markAsDone}
       />
     </View>

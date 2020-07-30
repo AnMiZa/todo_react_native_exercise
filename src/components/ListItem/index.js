@@ -5,7 +5,7 @@ import ToDoIcon from '../../assets/images/to_do.png'
 import DoneIcon from '../../assets/images/done.png'
 import propTypes from 'prop-types'
 
-const ListItem = ({ position, markAsDone }) => {
+const ListItem = ({ position, markAsDone, onEditItem }) => {
   const { item } = position
   const { key, title } = item
 
@@ -16,12 +16,14 @@ const ListItem = ({ position, markAsDone }) => {
           <Image style={styles.icon} source={item.isDone ? DoneIcon : ToDoIcon}/>
         </View>
         <View style={styles.taskContainer}>
-          <Text
-            style={item.isDone ? styles.textDone : styles.textNotDone}
-            key={key}
-          >
-            {title}
-          </Text>
+          <TouchableOpacity onPress={onEditItem(key, title)}>
+            <Text
+              style={item.isDone ? styles.textDone : styles.textNotDone}
+              key={key}
+            >
+              {title}
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </TouchableOpacity>
@@ -30,7 +32,8 @@ const ListItem = ({ position, markAsDone }) => {
 
 ListItem.propTypes = {
   position: propTypes.object.isRequired,
-  markAsDone: propTypes.func.isRequired
+  markAsDone: propTypes.func.isRequired,
+  onEditItem: propTypes.func.isRequired
 }
 
 export default ListItem

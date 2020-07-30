@@ -4,7 +4,7 @@ import styles from './styles'
 import ListItem from '../ListItem'
 import propTypes from 'prop-types'
 
-const ItemList = ({ list, markAsDone }) => {
+const ItemList = ({ list, markAsDone, onEditItem }) => {
 
   return list.length === 0
     ?
@@ -12,13 +12,14 @@ const ItemList = ({ list, markAsDone }) => {
     :
     <FlatList
       data={list}
-      renderItem={position => <ListItem position={position} markAsDone={markAsDone}/>}
+      renderItem={position => <ListItem position={position} markAsDone={markAsDone} onEditItem={onEditItem}/>}
     />
 }
 
 ItemList.propTypes = {
   list: propTypes.array.isRequired,
-  markAsDone: propTypes.func.isRequired
+  markAsDone: propTypes.func.isRequired,
+  onEditItem: propTypes.func.isRequired
 }
 
 export default ItemList

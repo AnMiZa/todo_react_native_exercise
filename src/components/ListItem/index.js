@@ -27,7 +27,7 @@ const ListItem = ({ position, markAsDone, onEditItem, onDeleteButtonPress}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.deleteIconContainer}>
-          <TouchableOpacity onPress={onDeleteButtonPress(index)}>
+          <TouchableOpacity onPress={()=>onDeleteButtonPress(index)}>
             <Image source={DeleteIcon} style={styles.deleteIcon}/>
           </TouchableOpacity>
         </View>

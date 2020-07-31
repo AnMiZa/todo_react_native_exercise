@@ -18,8 +18,11 @@ const App: () => React$Node = () => {
   const [textValue, setTextValue] = useState('')
   const [modalIsVisible, setModalIsVisible] = useState(false)
   const [modalText, setModalText] = useState('')
+  const [currentKey, setCurrentKey] = useState(0)
 
   const onAddButtonPress = () => {
+    if (!textValue) return
+
     let newListItem = {
       key: (list.length + 1).toString(),
       title: textValue,
@@ -47,13 +50,23 @@ const App: () => React$Node = () => {
   const onEditItem = (itemKey, text) => () => {
     setModalIsVisible(true)
     setModalText(text)
+    setCurrentKey(itemKey)
   }
 
-  const onModalChangeText = text => () => {
-    setModalText(text)
-  }
-  const onModalSave = text => () => {
-    setModalText(text)
+  const onModalChangeText = text => setModalText(text)
+
+  const onModalSave = () => {
+    const existingList = [...list]
+
+    existingList.forEach(item => {
+      if (item.key !== currentKey) return
+
+      item.title = modalText
+      return false
+    })
+
+    setList(existingList)
+    setModalIsVisible(false)
   }
 
   console.log(list)
@@ -74,7 +87,7 @@ const App: () => React$Node = () => {
       </View>
       <EditItemModal
         isVisible={modalIsVisible}
-        onSave={() => {}}
+        onSave={onModalSave}
         onClose={() => setModalIsVisible(false)}
         modalText={modalText}
         onModalChangeText={onModalChangeText}

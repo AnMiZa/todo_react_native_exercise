@@ -6,15 +6,22 @@ export default StyleSheet.create({
     alignItems: 'center',
     padding: 5
   },
-  iconContainer: {
+  checkIconContainer: {
     width: '10%'
   },
   taskContainer: {
-    width: '90%'
+    width: '80%'
   },
-  icon: {
+  deleteIconContainer: {
+    width: '10%'
+  },
+  checkIcon: {
     width: 20,
     height: 20
+  },
+  deleteIcon:{
+    width: 17,
+    height: 17
   },
   textNotDone: {
     fontSize: 20

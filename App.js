@@ -33,6 +33,12 @@ const App: () => React$Node = () => {
     setTextValue('')
   }
 
+  const onDeleteButtonPress = index => () => {
+    const existingList = [...list]
+    existingList.splice(index, 1)
+    setList(existingList)
+  }
+
   const onInputTextChange = text => setTextValue(text)
 
   const markAsDone = key => () => {
@@ -83,6 +89,7 @@ const App: () => React$Node = () => {
           list={list}
           markAsDone={markAsDone}
           onEditItem={onEditItem}
+          onDeleteButtonPress={onDeleteButtonPress}
         />
       </View>
       <EditItemModal

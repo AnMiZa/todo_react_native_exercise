@@ -1,106 +1,14 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
-import React, { useState } from 'react'
-import { View } from 'react-native'
-import ItemList from './src/components/ItemList'
-import InputBar from './src/components/InputBar'
-import EditItemModal from './src/components/EditItemModal'
+import React from 'react';
+import Main from './src/containers/Main';
+import {Provider} from 'react-redux';
+import store from './src/store';
 
 const App: () => React$Node = () => {
-
-  const [list, setList] = useState([])
-  const [textValue, setTextValue] = useState('')
-  const [modalIsVisible, setModalIsVisible] = useState(false)
-  const [modalText, setModalText] = useState('')
-  const [currentKey, setCurrentKey] = useState(0)
-
-  const onAddButtonPress = () => {
-    if (!textValue) return
-
-    let newListItem = {
-      key: (list.length + 1).toString(),
-      title: textValue,
-      isDone: false
-    }
-
-    setList([...list, newListItem])
-    setTextValue('')
-  }
-
-  const onDeleteButtonPress = index => () => {
-    const existingList = [...list]
-    existingList.splice(index, 1)
-    setList(existingList)
-  }
-
-  const onInputTextChange = text => setTextValue(text)
-
-  const markAsDone = key => () => {
-    let existingList = [...list]
-
-    existingList.forEach(item => {
-      if (item.key !== key) return
-      item.isDone = !item.isDone
-    })
-
-    setList(existingList)
-    return false
-  }
-
-  const onEditItem = (itemKey, text) => () => {
-    setModalIsVisible(true)
-    setModalText(text)
-    setCurrentKey(itemKey)
-  }
-
-  const onModalChangeText = text => setModalText(text)
-
-  const onModalSave = () => {
-    const existingList = [...list]
-
-    existingList.forEach(item => {
-      if (item.key !== currentKey) return
-
-      item.title = modalText
-      return false
-    })
-
-    setList(existingList)
-    setModalIsVisible(false)
-  }
-
-  console.log(list)
-
   return (
-    <>
-      <View style={{ padding: 12 }}>
-        <InputBar
-          textValue={textValue}
-          onAddButtonPress={onAddButtonPress}
-          onInputTextChange={onInputTextChange}
-        />
-        <ItemList
-          list={list}
-          markAsDone={markAsDone}
-          onEditItem={onEditItem}
-          onDeleteButtonPress={onDeleteButtonPress}
-        />
-      </View>
-      <EditItemModal
-        isVisible={modalIsVisible}
-        onSave={onModalSave}
-        onClose={() => setModalIsVisible(false)}
-        modalText={modalText}
-        onModalChangeText={onModalChangeText}
-      />
-    </>
-  )
-}
+    <Provider store={store}>
+      <Main />
+    </Provider>
+  );
+};
 
-export default App
+export default App;
